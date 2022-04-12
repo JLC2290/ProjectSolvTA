@@ -16,14 +16,56 @@ public class FarmaciaApp {
         Mutual mutual2 = new Mutual("SPS","Avenida falsa 321");
 
 
-        Product product1 = new Product("Shampoo","Head & Shoulders", 15.00,10);
+        Product product1 = new Product("Shampoo","Head & Shoulders", 122.00,10);
         Canasto canasto1 = new Canasto();
         Canasto canasto2 = new Canasto();
         Costumer client1 = new Costumer("Jose", 32, mutual1 ,001,canasto1);
         Costumer client2 = new Costumer("Juan", 35, mutual2 , 002,canasto2);
+        Cajero cajero1 = new Cajero("Julian",38,3800.00,01);
+        Cajero cajero2 = new Cajero("Jorge",28,3800.00,02);
 
-        farmacia farmacia1 = new farmacia(01,"Arequipa","Arequipa 1xxx","4440096");
 
+        farmacia farmacia1 = new farmacia();
+
+
+        farmacia1.addCajeroStation(cajero1);
+        farmacia1.addCostumerInQueue(client1);
+        farmacia1.addCajeroStation(cajero2);
+
+     //Farmacy loggers and methods
+
+        try {
+            farmacia1.serveCostumer();
+        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            farmacia1.finishService(cajero1);
+        } catch (StationEmptyException e) {
+            LOGGER.error(e.getMessage());
+        }
+        //Throw error because there aren't people in the queue
+        try {
+            farmacia1.serveCostumer();
+        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
+            LOGGER.error(e.getMessage());
+        }
+        farmacia1.addCostumerInQueue(client2);
+        try {
+            farmacia1.serveCostumer();
+        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+
+
+
+
+
+
+
+
+    //Product loggers and methods
         try {
             canasto1.getProduct(1);
         } catch (ProductNotFoundException e) {
@@ -31,7 +73,7 @@ public class FarmaciaApp {
         }
 
         try {
-            canasto1.addProduct(new Product("Perfume","Devon",16.00,3));
+            canasto1.addProduct(new Product("Perfume","Devon",360.00,3));
         } catch (CarritoFullException e) {
             LOGGER.error(e.getMessage());
         }
