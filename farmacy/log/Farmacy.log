@@ -6,3 +6,5 @@
 2022-04-12 19:25:03,590 ERROR f.FarmaciaApp [main] Producto no encontrado.
 2022-04-12 19:25:03,593 ERROR f.FarmaciaApp [main] Producto no encontrado.
 2022-04-12 19:25:03,593 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-22 09:47:46,559 ERROR C.WordsCountApp [main] java.io.FileNotFoundException: File 'src\resources\ARTICLE.txt' does not exist
+2022-04-22 10:23:57,134 ERROR C.WordsCountApp [main] java.io.FileNotFoundException: File 'src\main\resourcess\ARTICLE.txt' does not exist

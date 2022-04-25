@@ -1,8 +1,15 @@
 package farmacia;
+import Enums.ESpeciality;
 import com.Solvd.exeptions.*;
+import farmacia.People.Costumer;
+import farmacia.People.Farmaceutico;
+import farmacia.Utils.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.Date;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class FarmaciaApp {
@@ -11,61 +18,72 @@ public class FarmaciaApp {
 
     public static void main(String[] args) {
 
-
-        Mutual mutual1 = new Mutual("Ioscor","Avenida falsa 123");
-        Mutual mutual2 = new Mutual("SPS","Avenida falsa 321");
+        final RecipeCheck recepy = new RecipeCheck();
 
 
-        Product product1 = new Product("Shampoo","Head & Shoulders", 122.00,10);
+        //initializing farmacia
+        Farmacia farmacia1 = new Farmacia("Farmacia Arequipa","Arequipa 1xx9");
+        LOGGER.info(farmacia1.toString());
+
+        //initializing Producto
+        Product product1 = new Product("Shampoo","Head & Shoulders", 122.00);
+
+        //initializing Remedio
+        Remedio remedio1 = new Remedio("Hipoglos","Adromaco",300.00,"Crema","Pomaga 100g");
+
+        //initializing canasto
         Canasto canasto1 = new Canasto();
         Canasto canasto2 = new Canasto();
-        Costumer client1 = new Costumer("Jose", 32, mutual1 ,001,canasto1);
-        Costumer client2 = new Costumer("Juan", 35, mutual2 , 002,canasto2);
-        Cajero cajero1 = new Cajero("Julian",38,3800.00,01);
-        Cajero cajero2 = new Cajero("Jorge",28,3800.00,02);
+
+        //initializing cliente
+        Costumer client1 = new Costumer(1,"Jose", "Kilo",  "SPS",canasto1);
+        Costumer client2 = new Costumer(2,"Juan", "Hosey", "IOSCOR",canasto2);
+        Costumer client3 = new Costumer(3,"Pedro", "Jamal", "",canasto2);
 
 
-        farmacia farmacia1 = new farmacia();
+        //initializing recetas
+        Receta receta1 = recepy.generarReceta(farmacia1, LocalDate.now(), LocalTime.now(),"Ulises",client1,remedio1, BigDecimal.valueOf(2000));
+        Receta receta2 = recepy.generarReceta(farmacia1, LocalDate.now(), LocalTime.now(),"Ibarra",client1,remedio1, BigDecimal.valueOf(2000));
+
+        try {
+
+            Receta receta3 = recepy.generarReceta(farmacia1, LocalDate.now(), LocalTime.now(), "Ibarra", client3,remedio1, BigDecimal.valueOf(2000));
+        } catch (NoMutualException e) {
+            LOGGER.error(e);
+        }
 
 
-        farmacia1.addCajeroStation(cajero1);
+        //initializing Farmaceutico
+
+       Farmaceutico far1 = new Farmaceutico (1,"Ariel", "Alan", ESpeciality.PER_FAC);
+        Farmaceutico far2 = new Farmaceutico (2,"Farti", "Refa", ESpeciality.PER_TEC);
+        Farmaceutico far3 = new Farmaceutico (3,"Gomos", "Pirel", ESpeciality.PER_FAC);
+        Farmaceutico far4 = new Farmaceutico (4,"Tarde", "Guaro", ESpeciality.PER_AUX);
+
+
+        //Remove Employee from the list
+
+        try {
+            farmacia1.removeFarmaceutico(far4);
+        } catch (EmployeeNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+
+        //Adding farmaceutico to farmacia
+
+        farmacia1.addFarmaceutico(far1);
+        farmacia1.addFarmaceutico(far2);
+        farmacia1.addFarmaceutico(far3);
+        farmacia1.addFarmaceutico(far4);
+
         farmacia1.addCostumerInQueue(client1);
-        farmacia1.addCajeroStation(cajero2);
-
-     //Farmacy loggers and methods
-
-        try {
-            farmacia1.serveCostumer();
-        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
-            LOGGER.error(e.getMessage());
-        }
-        try {
-            farmacia1.finishService(cajero1);
-        } catch (StationEmptyException e) {
-            LOGGER.error(e.getMessage());
-        }
-        //Throw error because there aren't people in the queue
-        try {
-            farmacia1.serveCostumer();
-        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
-            LOGGER.error(e.getMessage());
-        }
         farmacia1.addCostumerInQueue(client2);
-        try {
-            farmacia1.serveCostumer();
-        } catch (EmptyQueueException | StationEmptyException | NoStationAvailableException e) {
-            LOGGER.error(e.getMessage());
-        }
+        farmacia1.addCostumerInQueue(client3);
 
 
 
-
-
-
-
-
-
-    //Product loggers and methods
+        //Product loggers and methods
         try {
             canasto1.getProduct(1);
         } catch (ProductNotFoundException e) {
@@ -73,7 +91,7 @@ public class FarmaciaApp {
         }
 
         try {
-            canasto1.addProduct(new Product("Perfume","Devon",360.00,3));
+            canasto1.addProduct(new Product("Perfume","Devon",360.00));
         } catch (CarritoFullException e) {
             LOGGER.error(e.getMessage());
         }
@@ -102,7 +120,7 @@ public class FarmaciaApp {
         }
 
         try {
-            client1.getCart().addProduct(new Product("Leche","Arcor",350.00,2));
+            client1.getCart().addProduct(new Product("Leche","Arcor",350.00));
         } catch (CarritoFullException e) {
             LOGGER.error(e.getMessage());
         }
@@ -111,9 +129,6 @@ public class FarmaciaApp {
         } catch (CarritoVacioException e) {
             LOGGER.error(e.getMessage());
         }
-
-
-
 
     }
 }

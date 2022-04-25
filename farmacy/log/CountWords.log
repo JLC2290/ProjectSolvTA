@@ -1,0 +1,17 @@
+2022-04-22 10:26:58,631 ERROR C.WordsCountApp [main] java.io.FileNotFoundException: File 'src\main\resourcess\ARTICLE.txt' does not exist
+2022-04-25 10:35:23,011 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 10:35:23,017 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 10:35:23,017 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 10:35:57,393 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 10:35:57,398 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 10:35:57,398 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:46:32,973 ERROR f.FarmaciaApp [main] com.Solvd.exeptions.NoMutualException: Cliente no tiene mutual
+2022-04-25 14:46:32,984 ERROR f.FarmaciaApp [main] Employee not found.
+2022-04-25 14:46:32,984 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:46:32,987 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:46:32,987 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:50:10,837 ERROR f.FarmaciaApp [main] com.Solvd.exeptions.NoMutualException: Cliente no tiene mutual
+2022-04-25 14:50:10,840 ERROR f.FarmaciaApp [main] Employee not found.
+2022-04-25 14:50:10,840 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:50:10,843 ERROR f.FarmaciaApp [main] Producto no encontrado.
+2022-04-25 14:50:10,843 ERROR f.FarmaciaApp [main] Producto no encontrado.

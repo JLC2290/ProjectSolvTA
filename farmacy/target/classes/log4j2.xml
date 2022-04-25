@@ -9,17 +9,31 @@
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
         </File>
+        <File name="LogToFile" fileName="log/CountWords.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
     </Appenders>
 
     <Loggers>
         <Logger name="farmacia" level="debug" additivity="false">
             <AppenderRef ref="LogToConsole"/>
-            <AppenderRef ref="LogToFilefarmacia"/>
+            <AppenderRef ref="LogToFileFarmacy"/>
         </Logger>
+
+        <Logger name="CountWords" level="info" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFileCountWords"/>
+        </Logger>
+
+
         <Root level="error">
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
+
+
     <Loggers>
         <Logger name="org.example" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
@@ -28,9 +42,16 @@
         <Logger name="org.example" level="error" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
+
+
+
         <Root level="error">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Root>
+
+
+
+
     </Loggers>
 </Configuration>
